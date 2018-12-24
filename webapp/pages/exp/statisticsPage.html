@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/starter-template.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="../css/form-validation.css" rel="stylesheet">
+<link href="../css/bootstrap-table.min.css" rel="stylesheet">
+<link href="../css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="../css/fileinput.css" media="all" rel="stylesheet"
+	type="text/css" />
+<title>航班统计</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript" src="../js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap-table-zh-CN.js"></script>
+
+<script type="text/javascript" src="../js/vendor/popper.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script src="../js/fileinput.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript"
+	src="../js/bootstrap-datepicker.zh-CN.min.js"></script>
+<script src="../js/moment-with-locales.js" type="text/javascript"></script>
+<script src="../js/echarts-all.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#nav').load('navbar');
+		$('#footer').load('footer');
+
+		$("#date_from").datepicker({
+			"autoclose" : true,
+			"format" : "yyyy-mm-dd",
+			"language" : "zh-CN"
+		});
+
+		$("#date_to").datepicker({
+			"autoclose" : true,
+			"format" : "yyyy-mm-dd",
+			"language" : "zh-CN"
+		});
+	});
+
+	function queryEvent(method) {
+		$.get('ajaxStatistics',{date_from:$("#date_from").val(),date_to:$("#date_to").val() },function(data){
+			initChart(JSON.parse(data));
+		});
+		
+		
+	}
+	function initChart(jsonData) {
+		 var myChart = echarts.init(document.getElementById('main'));
+	        option = {
+	        	    title : {
+	        	        text: '航班类型统计',
+	        	        //subtext: '纯属虚构',
+	        	        x:'center'
+	        	    },
+	        	    tooltip : {
+	        	        trigger: 'item',
+	        	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+	        	    },
+	        	 //   color:['#4472C5','#ED7C30','#80FF80'],
+	        	    legend: {
+	        	        orient : 'vertical',
+	        	        x : 'left',
+	        	        data:['航前清洁','航后清洁','过站清洁']
+	        	    },
+	        	    toolbox: {
+	        	        show : true,
+	        	        feature : {
+	        	            mark : {show: false},
+	        	            dataView : {show: false, readOnly: false},
+	        	            magicType : {
+	        	                show: true, 
+	        	                type: ['pie','funnel'],//, 'line','bar'
+	        	                option: {
+	        	                    funnel: {
+	        	                        x: '25%',
+	        	                        width: '50%',
+	        	                        funnelAlign: 'left',
+	        	                        max: 1548
+	        	                    }
+	        	                }
+	        	            },
+	        	            restore : {show: true},
+	        	            saveAsImage : {show: true}
+	        	        }
+	        	    },
+	        	    calculable : true,
+	        	    series : [
+	        	        {
+	        	            name:'航班统计',
+	        	            type:'pie',
+	        	            radius : '55%',
+	        	            center: ['50%', '60%'],
+	        	            data:jsonData
+	        	        }
+	        	    ]
+	        	};
+	        myChart.setOption(option);
+	}
+	function queryParams(params){
+          var temp={
+          		limit:params.limit,
+        		offset:params.offset,
+        		date_from: $("#date_from").val(),
+        		date_to: $("#date_to").val()
+          }
+          
+          return temp;
+	}
+</script>
+
+</head>
+<body class="bg-light">
+	<div id="nav"></div>
+	<div class="container">
+		<form action="export" method="post" th:object="${entity}">
+			<div class="row">
+				<div class="col-md-8 order-md-1 " style="text-align:center;" th:if="${errorMsg}">
+					<a class="errors" th:text="${errorMsg}"></a>
+				</div>
+				<div class="col-md-8 order-md-1 " style="text-align:center;" th:if="${successMsg}">
+					<a class="success" th:text="${successMsg}"></a>
+				</div>
+				<p></p>
+			</div>
+			
+			<div class="row">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 8%;"><label for="date_from">开始日期</label></td>
+						<td style="width: 22%;"><input type='text'
+							class="form-control form_datetime" style="width: 200px;"
+							id='date_from' th:field="*{date_from}" required /> <a
+							class="invalid-feedback">航班日期是必需的.</a></td>
+						<td style="width: 8%;"><label for="date_to">结束日期</label></td>
+						<td style="width: 42%;"><input type='text'
+							class="form-control form_datetime" style="width: 200px;"
+							id='date_to' th:field="*{date_to}" /> </td>	
+						<td style="width: 15%"><button
+								class="btn btn-primary btn-lg btn-block" style="width: 100px;"
+								type="button" onclick="queryEvent('statistics')">查询</button></td>
+						<td style="width: 5%">
+							
+						</td>
+					
+					</tr>
+				</table>
+				<hr />
+			</div>
+
+		</form>
+
+		<div id="main"  class="py-3" style="height:500px;width:600px;margin-left:10%;"></div>
+
+		<div id="footer"></div>
+
+	</div>
+
+</body>
+</html>

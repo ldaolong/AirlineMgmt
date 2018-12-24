@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.darren.machine.dao.AirlineDao">
+	<cache></cache>
+	<resultMap id="airlineMap" type="com.darren.machine.domain.AirlineEntity">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="device_number" property="device_number" jdbcType="VARCHAR" />
+		<result column="flight_number" property="flight_number" jdbcType="VARCHAR" />
+		<result column="take_off_loc" property="take_off_loc" jdbcType="VARCHAR" />
+		<result column="take_off_time" property="take_off_time" jdbcType="TIME" />
+		<result column="landing_loc" property="landing_loc" jdbcType="VARCHAR" />
+		<result column="landing_time" property="landing_time" jdbcType="TIME" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="airline_date" property="airline_date" jdbcType="DATE" />
+		<result column="createdAt" property="createdAt" jdbcType="DATE" />
+		<result column="createdBy" property="createdBy" jdbcType="VARCHAR" />
+		<result column="updatedAt" property="updatedAt" jdbcType="DATE" />
+		<result column="updatedBy" property="updatedBy" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, device_number, flight_number, take_off_loc,take_off_time,landing_loc,landing_time,type,airline_date,
+		createdAt,createdBy,updatedAt,updatedBy
+	</sql>
+	<select id="selectById" resultMap="airlineMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="selectByDevice" resultMap="airlineMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline
+		where device_number = #{device_number,jdbcType=VARCHAR}
+	</select>
+	<select id="selectBy" resultMap="airlineMap"
+		parameterType="com.darren.machine.domain.AirlineEntity" useCache="true">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline
+		where 1=1
+		<if test="device_number != null">
+			and device_number like #{device_number,jdbcType=VARCHAR}
+		</if>
+		<if test="flight_number != null">
+			and flight_number like #{flight_number,jdbcType=VARCHAR}
+		</if>
+		
+		<if test="airline_date != null">
+			and airline_date = #{airline_date,jdbcType=DATE}
+		</if>
+	   <if test="date_from != null">
+			and airline_date &gt;= #{date_from,jdbcType=DATE}
+		</if>
+		<if test="date_to != null">
+			and airline_date &lt;= #{date_to,jdbcType=DATE}
+		</if>	
+		order by airline_date,device_number,take_off_time
+		
+	</select>
+	
+	<select id="getStatistics" resultMap="airlineMap" parameterType="com.darren.machine.domain.AirlineEntity">
+		select
+		  count(1) air_cnt,type 
+		from t_airline
+		where 1=1
+		<if test="date_from != null">
+			and airline_date &gt;= #{date_from,jdbcType=DATE}
+		</if>
+		<if test="date_to != null">
+			and airline_date &lt;= #{date_to,jdbcType=DATE}
+		</if>	
+		group by type	
+	</select>
+	
+	<select id="selectAll" resultMap="airlineMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline
+	</select>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from t_airline
+		where id
+		= #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByDate" parameterType="java.util.Date">
+		delete from t_airline
+		where airline_date
+		= #{airline_date,jdbcType=DATE}
+	</delete>
+	<insert id="insertBy" parameterType="com.darren.machine.domain.AirlineEntity" >
+		<selectKey keyProperty="id" resultType="Long" order="BEFORE">
+			SELECT
+			nextval('seq_airline_id')；
+		</selectKey>
+		insert into t_airline (id, device_number, flight_number, take_off_loc,take_off_time,
+		landing_loc,landing_time,type,airline_date,createdAt,createdBy,updatedAt,updatedBy)
+		values (#{id},
+		#{device_number,jdbcType=VARCHAR}, #{flight_number,jdbcType=VARCHAR},
+		#{take_off_loc,jdbcType=VARCHAR},#{take_off_time,jdbcType=TIME},
+		#{landing_loc,jdbcType=VARCHAR},#{landing_time,jdbcType=TIME},
+		#{type,jdbcType=VARCHAR},#{airline_date,jdbcType=DATE},#{createdAt,jdbcType=DATE},
+		#{createdBy,jdbcType=VARCHAR},#{updatedAt,jdbcType=DATE},
+		#{updatedBy,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+
+		insert into t_airline (device_number, flight_number, take_off_loc,take_off_time,
+		landing_loc,landing_time,type,createdAt,createdBy,updatedAt,updatedBy) values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+		#{device_number,jdbcType=VARCHAR}, #{flight_number,jdbcType=VARCHAR},
+		#{take_off_loc,jdbcType=VARCHAR},#{take_off_time,jdbcType=DATE},
+		#{landing_loc,jdbcType=VARCHAR},#{landing_time,jdbcType=DATE},
+		#{type,jdbcType=VARCHAR},#{airline_date,jdbcType=DATE},#{createdAt,jdbcType=TIME},
+		#{createdBy,jdbcType=VARCHAR},#{updatedAt,jdbcType=TIME},
+		#{updatedBy,jdbcType=VARCHAR}
+		)
+		</foreach>
+	</insert>
+	
+</mapper>

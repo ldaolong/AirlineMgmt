@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "${APPLICATION_NAME}"
+  labels:
+    app: "${APPLICATION_NAME}"
+    pipeline_id: "$CI_PIPELINE_ID"
+    build_id: "$CI_BUILD_ID"
+spec:
+  replicas: ${REPLICAS}
+  selector:
+    matchLabels:
+      app: "${APPLICATION_NAME}"
+  template:
+    metadata:
+      ## annotations:
+      ##  iam.amazonaws.com/role: $IAM_ROLE
+      labels:
+        name: "${APPLICATION_NAME}"
+        app: "${APPLICATION_NAME}"
+    spec:
+      containers:
+      - name: "${APPLICATION_NAME}"
+        image: "$IMAGEURL"
+        envFrom:
+        - configMapRef:
+            name: ${APPLICATION_NAME}
+        - secretRef:
+            name: ${APPLICATION_NAME}
+
+        env:
+        - name: CI_COMMIT_SHA_FORCE_REDEPLOY
+          value: "$CI_COMMIT_SHA"
+        imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: 1
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 40
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 8
+          timeoutSeconds: 10
+          successThreshold: 1
+          failureThreshold: 20
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+

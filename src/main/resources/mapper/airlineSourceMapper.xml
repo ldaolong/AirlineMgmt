@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.darren.machine.dao.AirlineSourceDao">
+	<resultMap id="airlineSourceMap" type="com.darren.machine.domain.AirlineSourceEntity">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="url2" property="url2" jdbcType="VARCHAR" />
+		<result column="param" property="param" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, url,url2, param
+	</sql>
+	<select id="selectById" resultMap="airlineSourceMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_source
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+		<select id="selectByName" resultMap="airlineSourceMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_source
+		where url = #{url,jdbcType=VARCHAR}
+	</select>
+	<select id="selectBy" resultMap="airlineSourceMap"
+		parameterType="com.darren.machine.domain.AirlineSourceEntity">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_source
+		where 1=1
+		<if test="url != null">
+			and url = #{url,jdbcType=VARCHAR}
+		</if>
+		<if test="param != null">
+			and param = #{param,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<select id="selectAll" resultMap="airlineSourceMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_source
+	</select>
+	<delete id="deleteById" parameterType="java.lang.Long">
+		delete from t_airline_source
+		where id
+		= #{id,jdbcType=BIGINT}
+	</delete>
+	
+	<update id="updateBy" parameterType="com.darren.machine.domain.AirlineSourceEntity">
+		update t_airline_source
+		set url =
+		#{url,jdbcType=VARCHAR},
+		url2 =
+		#{url2,jdbcType=VARCHAR},
+		param = #{param,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,24 @@
+## ingress for internal endpoints use kube ingress class (and a different cert)
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ${APPLICATION_NAME}-internal
+  labels:
+    app: ${APPLICATION_NAME}
+    pipeline_id: "$CI_PIPELINE_ID"
+    build_id: "$CI_BUILD_ID"
+  annotations:
+    kubernetes.io/ingress.class: "kube"
+    ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  rules:
+  - host: ${DOMAIN_INTERNAL}
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ${APPLICATION_NAME}
+          servicePort: 80
+

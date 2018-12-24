@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/starter-template.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="../css/form-validation.css" rel="stylesheet">
+<link href="../css/bootstrap-table.min.css" rel="stylesheet">
+<link href="../css/fileinput.css" media="all" rel="stylesheet"
+	type="text/css" />
+<title>业务规则</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+
+<script type="text/javascript" src="../js/bootstrap-table.min.js"></script>
+
+<script type="text/javascript" src="../js/vendor/popper.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script src="../js/fileinput.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		$('#nav').load('navbar');
+		$('#footer').load('footer');
+
+	});
+
+</script>
+
+</head>
+<body class="bg-light">
+	<div id="nav"></div>
+	<div class="container">
+		<div class="py-3 text-center">
+				<h4 class="mb-3">业务规则</h4>
+		</div>
+
+		<div class="row">
+
+			<div class="col-md-8 order-md-1" style="margin-left:12%">
+					<div class="col-md-8 order-md-1 " style="text-align:center;" th:if="${errorMsg}">
+						<a class="errors" th:text="${errorMsg}"></a>
+					</div>
+					<div class="col-md-8 order-md-1 " style="text-align:center;" th:if="${successMsg}">
+						<a class="success" th:text="${successMsg}"></a>
+					</div>
+					<p></p>
+				<form class="needs-validation" action="biz_rule" method="post" th:object="${entity}">
+				<input type="hidden" id="primary_key" name="id" th:value="*{id}" >
+					<div class="mb-3">
+						<label for="name">名称</label>
+						<div class="input-group">
+							 <select
+								class="custom-select d-block w-100" id="name" name="name" th:field="${entity.name}" th:value="${entity.name}" required>
+								<option value="">选择...</option>
+								<option value="device_number" th:selected="${entity.name == 'device_number'}">机号</option>
+								<option value="flight_number" th:selected="${entity.name == 'flight_number'}">航班号</option>
+							</select>
+							<div class="invalid-feedback" style="width: 100%;">规则名称是必需的.</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="rule">条件 <span class="text-muted">(可选)</span></label>
+						<input type="text" class="form-control" id="variables" th:field="*{rule}"
+							placeholder="MU%">
+					</div>
+
+					<hr class="mb-4">
+					<button class="btn btn-primary btn-lg btn-block" type="submit">保存</button>
+				</form>
+			</div>
+		</div>
+
+
+		<div id="footer"></div>
+
+	</div>
+
+</body>
+</html>

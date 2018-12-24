@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.darren.machine.dao.AirlineRuleDao">
+	<resultMap id="airlineRuleMap" type="com.darren.machine.domain.AirlineRuleEntity">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="rule" property="rule" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, name, rule
+	</sql>
+	<select id="selectById" resultMap="airlineRuleMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_rule
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<select id="selectByName" resultMap="airlineRuleMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_rule
+		where name = #{name,jdbcType=VARCHAR}
+	</select>
+	<select id="selectBy" resultMap="airlineRuleMap"
+		parameterType="com.darren.machine.domain.AirlineRuleEntity">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_rule
+		where 1=1
+		<if test="name != null">
+			and name = #{name,jdbcType=VARCHAR}
+		</if>
+		<if test="rule != null">
+			and rule = #{rule,jdbcType=VARCHAR}
+		</if>
+		<if test="id != null">
+			and id = #{id,jdbcType=BIGINT}
+		</if>
+	</select>
+	<select id="selectAll" resultMap="airlineRuleMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_airline_rule
+	</select>
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from t_airline_rule
+		where id
+		= #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insertBy" parameterType="com.darren.machine.domain.AirlineRuleEntity" >
+		<selectKey keyProperty="id" resultType="Long" order="BEFORE">
+			SELECT
+			nextval('seq_airline_rule_id')；
+		</selectKey>
+		insert into t_airline_rule (id,name, rule)
+		values (#{id},
+		#{name,jdbcType=VARCHAR}, #{rule,jdbcType=VARCHAR})
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.darren.machine.domain.AirlineRuleEntity">
+		update t_airline_rule
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="rule != null">
+				rule = #{rule,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateBy" parameterType="com.darren.machine.domain.AirlineRuleEntity">
+		update t_airline_rule
+		set name =
+		#{name,jdbcType=VARCHAR},
+		rule = #{rule,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+</mapper>

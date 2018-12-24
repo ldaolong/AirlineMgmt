@@ -1,0 +1,58 @@
+Mybatis中javaType和jdbcType对应关系
+类型处理器						Java 类型								JDBC 类型
+BooleanTypeHandler			java.lang.Boolean, boolean				数据库兼容的 BOOLEAN
+ByteTypeHandler				java.lang.Byte, byte					数据库兼容的 NUMERIC 或 BYTE
+ShortTypeHandler			java.lang.Short, short					数据库兼容的 NUMERIC 或 SHORT INTEGER
+IntegerTypeHandler			java.lang.Integer, int					数据库兼容的 NUMERIC 或 INTEGER
+LongTypeHandler				java.lang.Long, long					数据库兼容的 NUMERIC 或 LONG INTEGER
+FloatTypeHandler			java.lang.Float, float					数据库兼容的 NUMERIC 或 FLOAT
+DoubleTypeHandler			java.lang.Double, double				数据库兼容的 NUMERIC 或 DOUBLE
+BigDecimalTypeHandler	java.math.BigDecimal	数据库兼容的 NUMERIC 或 DECIMAL
+StringTypeHandler	java.lang.String	CHAR, VARCHAR
+ClobReaderTypeHandler	java.io.Reader	-
+ClobTypeHandler	java.lang.String	CLOB, LONGVARCHAR
+NStringTypeHandler	java.lang.String	NVARCHAR, NCHAR
+NClobTypeHandler	java.lang.String	NCLOB
+BlobInputStreamTypeHandler	java.io.InputStream	-
+ByteArrayTypeHandler	byte[]	数据库兼容的字节流类型
+BlobTypeHandler	byte[]	BLOB, LONGVARBINARY
+DateTypeHandler	java.util.Date	TIMESTAMP
+DateOnlyTypeHandler	java.util.Date	DATE
+TimeOnlyTypeHandler	java.util.Date	TIME
+SqlTimestampTypeHandler	java.sql.Timestamp	TIMESTAMP
+SqlDateTypeHandler	java.sql.Date	DATE
+SqlTimeTypeHandler	java.sql.Time	TIME
+ObjectTypeHandler	Any	OTHER 或未指定类型
+EnumTypeHandler	Enumeration Type	VARCHAR-任何兼容的字符串类型，存储枚举的名称（而不是索引）
+EnumOrdinalTypeHandler	Enumeration Type	任何兼容的 NUMERIC 或 DOUBLE 类型，存储枚举的索引（而不是名称）。
+InstantTypeHandler	java.time.Instant	TIMESTAMP
+LocalDateTimeTypeHandler	java.time.LocalDateTime	TIMESTAMP
+LocalDateTypeHandler	java.time.LocalDate	DATE
+LocalTimeTypeHandler	java.time.LocalTime	TIME
+OffsetDateTimeTypeHandler	java.time.OffsetDateTime	TIMESTAMP
+OffsetTimeTypeHandler	java.time.OffsetTime	TIME
+ZonedDateTimeTypeHandler	java.time.ZonedDateTime	TIMESTAMP
+YearTypeHandler	java.time.Year	INTEGER
+MonthTypeHandler	java.time.Month	INTEGER
+YearMonthTypeHandler	java.time.YearMonth	VARCHAR or LONGVARCHAR
+JapaneseDateTypeHandler	java.time.chrono.JapaneseDate	DATE
+
+
+<低于3.4.0 版本>
+<typeHandlers>  
+    <typeHandler handler="org.apache.ibatis.type.InstantTypeHandler" />  
+    <typeHandler handler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />  
+    <typeHandler handler="org.apache.ibatis.type.LocalDateTypeHandler" />  
+    <typeHandler handler="org.apache.ibatis.type.LocalTimeTypeHandler" />  
+    <typeHandler handler="org.apache.ibatis.type.OffsetDateTimeTypeHandler" />  
+    <typeHandler handler="org.apache.ibatis.type.OffsetTimeTypeHandler" />  
+    <typeHandler handler="org.apache.ibatis.type.ZonedDateTimeTypeHandler" />  
+</typeHandlers>  
+
+
+原符号	  <	   <=	   >	   >=	    &	     '	      "
+替换符号	&lt;	&lt;=	&gt;	&gt;=	&amp;	&apos;	&quot;
+
+
+
+

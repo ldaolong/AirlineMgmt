@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/Activiti" />
+		<property name="username" value="postgres" />
+		<property name="password" value="POSTGRES" />
+		
+		<property name="defaultAutoCommit" value="false" />
+		
+		<!-- 
+		<property name="jdbcMaxActiveConnections" value="false" />
+		<property name="jdbcMaxIdleConnections" value="false" />
+		<property name="jdbcMaxCheckoutTime" value="false" />
+		<property name="jdbcMaxWaitTime" value="false" /> 
+		
+			db=h2
+	jdbc.driver=org.h2.Driver
+	jdbc.url=jdbc:h2:mem:activiti;DB_CLOSE_DELAY=-1
+	jdbc.username=sa
+	jdbc.password=
+		-->
+	</bean>
+
+	<bean id="processEngineConfiguration"
+		class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+		
+		<property name="dataSource" ref="dataSource" />
+		<!-- databaseSchemaUpdate: false, otherwise will create a new schema every time -->
+		<property name="databaseSchemaUpdate" value="false" />
+		<!-- 
+		<property name="jobExecutorActivate" value="false" />
+		<property name="asyncExecutorEnabled" value="true" />
+		
+		 -->
+		
+		<property name="asyncExecutorActivate" value="false" />
+		<property name="mailServerHost" value="mail.my-corp.com" />
+		<property name="mailServerPort" value="5025" />
+		
+		<property name="processDefinitionCacheLimit" value="10" />
+		
+		<property name="eventListeners">
+			<list>
+				<bean class="com.example.activiti.MyEventListener" />
+			</list>
+		</property>
+	</bean>
+
+</beans>

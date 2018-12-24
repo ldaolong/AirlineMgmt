@@ -1,0 +1,231 @@
+body {
+	margin: 0px; padding: 0px;
+}
+div {
+	margin: 0px; padding: 0px;
+}
+dl {
+	margin: 0px; padding: 0px;
+}
+dt {
+	margin: 0px; padding: 0px;
+}
+dd {
+	margin: 0px; padding: 0px;
+}
+ul {
+	margin: 0px; padding: 0px;
+}
+ol {
+	margin: 0px; padding: 0px;
+}
+li {
+	margin: 0px; padding: 0px;
+}
+h1 {
+	margin: 0px; padding: 0px;
+}
+h2 {
+	margin: 0px; padding: 0px;
+}
+h3 {
+	margin: 0px; padding: 0px;
+}
+h4 {
+	margin: 0px; padding: 0px;
+}
+h5 {
+	margin: 0px; padding: 0px;
+}
+h6 {
+	margin: 0px; padding: 0px;
+}
+pre {
+	margin: 0px; padding: 0px;
+}
+form {
+	margin: 0px; padding: 0px;
+}
+fieldset {
+	margin: 0px; padding: 0px;
+}
+input {
+	margin: 0px; padding: 0px;
+}
+textarea {
+	margin: 0px; padding: 0px;
+}
+p {
+	margin: 0px; padding: 0px;
+}
+blockquote {
+	margin: 0px; padding: 0px;
+}
+th {
+	margin: 0px; padding: 0px;
+}
+td {
+	margin: 0px; padding: 0px;
+}
+body {
+	line-height: 1.3em; font-size: 12px;
+}
+table {
+	border-collapse: collapse; border-spacing: 0;
+}
+img {
+	border: 0px currentColor; border-image: none;
+}
+address {
+	font-style: normal; font-weight: normal;
+}
+caption {
+	font-style: normal; font-weight: normal;
+}
+cite {
+	font-style: normal; font-weight: normal;
+}
+code {
+	font-style: normal; font-weight: normal;
+}
+dfn {
+	font-style: normal; font-weight: normal;
+}
+em {
+	font-style: normal; font-weight: normal;
+}
+strong {
+	font-style: normal; font-weight: normal;
+}
+th {
+	font-style: normal; font-weight: normal;
+}
+var {
+	font-style: normal; font-weight: normal;
+}
+ol {
+	list-style: none;
+}
+ul {
+	list-style: none;
+}
+caption {
+	text-align: left;
+}
+th {
+	text-align: left;
+}
+h1 {
+	font-size: 100%; font-weight: normal;
+}
+h2 {
+	font-size: 100%; font-weight: normal;
+}
+h3 {
+	font-size: 100%; font-weight: normal;
+}
+h4 {
+	font-size: 100%; font-weight: normal;
+}
+h5 {
+	font-size: 100%; font-weight: normal;
+}
+h6 {
+	font-size: 100%; font-weight: normal;
+}
+q::before {
+	content: "";
+}
+q::after {
+	content: "";
+}
+abbr {
+	border: 0px currentColor; border-image: none;
+}
+acronym {
+	border: 0px currentColor; border-image: none;
+}
+body {
+	background: rgb(102, 153, 204); margin: 0px auto; width: 100%;
+}
+.wrap {
+	background: url("../images/top_bg.jpg") repeat-x; margin: 0px auto; width: 100%;
+}
+.top {
+	background: url("../images/top.jpg") no-repeat top; width: 100%; height: 100px;
+}
+.top span {
+	left: 20px; top: 80px; height: 20px; color: rgb(24, 48, 74); line-height: 20px; position: relative;
+}
+.top span select {
+	margin-right: 30px; float: left;
+}
+.aoc_table {
+	margin: 0px auto; border: 1px solid rgb(109, 118, 161); border-image: none; width: 100%; border-collapse: collapse; background-color: rgb(135, 206, 236);
+}
+.aoc_table th {
+	border: 1px solid rgb(104, 99, 153); border-image: none; height: 32px; text-align: center; color: rgb(32, 90, 153); line-height: 160%; font-size: 12px; font-weight: bold; background-color: rgb(223, 223, 223);
+}
+.acc_table_th a {
+	color: rgb(0, 0, 255);
+}
+a:link {
+	color: rgb(32, 90, 153); text-decoration: none;
+}
+a:visited {
+	color: rgb(153, 0, 0); text-decoration: none;
+}
+a:hover {
+	color: rgb(255, 153, 0); text-decoration: none;
+}
+.aoc_table td {
+	border: 1px solid rgb(104, 99, 153); border-image: none; height: 16px; text-align: center; color: rgb(0, 51, 102); line-height: 160%;
+}
+.aoc_table tr:hover {
+	background-color: rgb(218, 218, 218);
+}
+.aoc_table .color_1 {
+	color: rgb(255, 255, 255); background-color: rgb(0, 101, 143);
+}
+.aoc_table .color_2 {
+	color: rgb(255, 255, 255); background-color: rgb(70, 130, 180);
+}
+.aoc_table .color_red {
+	background: rgb(255, 48, 48); color: rgb(255, 255, 255);
+}
+.a320 {
+	background: rgb(107, 167, 204); color: rgb(153, 51, 51);
+}
+#regForm ul {
+	height: 120px; margin-top: 20px; margin-left: 5px;
+}
+#regForm li {
+	margin-bottom: 8px;
+}
+#regForm li span {
+	color: rgb(255, 255, 255); padding-left: 3px;
+}
+#regForm li label {
+	width: 145px; height: 20px; color: rgb(255, 255, 255); line-height: 20px; padding-left: 7px; font-weight: bold; margin-top: 5px; float: left;
+}
+#regForm .input_165 {
+	border: 1px solid rgb(189, 189, 189); border-image: none; width: 165px; height: 18px; color: rgb(101, 106, 109); line-height: 18px; text-indent: 5px; margin-top: 5px; margin-left: 5px;
+}
+#regForm input:focus {
+	outline: rgb(135, 206, 235) solid 1px; -moz-outline-radius: 3px;
+}
+#regForm .button_bg_notice {
+	background: url("../images/button_bg_notice.png") no-repeat 0px 0px; padding: 1px; border: currentColor; border-image: none; width: 148px; height: 25px; color: white; line-height: 25px; letter-spacing: 0.3em; margin-right: 11px; margin-left: 7px; cursor: pointer;
+}
+#regForm .button_go {
+	background: rgb(109, 150, 202); border: 1px solid rgb(255, 255, 255); border-image: none; width: 20px; height: 18px; color: rgb(255, 255, 255); line-height: 18px; margin-top: 5px; margin-left: 5px;
+}
+.col_1 {
+	width: 5%;
+}
+.col_2 {
+	width: 7%;
+}
+.col_3 {
+	width: 6%;
+}

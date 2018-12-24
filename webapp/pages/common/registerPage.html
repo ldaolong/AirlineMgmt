@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<!--  -->
+<link rel="icon" href="../img/favicon.ico">
+
+<title>注册</title>
+
+<!-- Custom styles for this template -->
+<link href="../css/floating-labels.css" rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/starter-template.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="../css/form-validation.css" rel="stylesheet">
+<link href="../css/bootstrap-table.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+	<div class="container">
+		<form th:object="${user}" action="register" method="post">
+
+			<div class="text-center mb-4">
+				<img class="mb-4" src="../brand/bootstrap-solid.svg" alt=""
+					width="72" height="72">
+				<h1 class="h3 mb-3 font-weight-normal">注 册</h1>
+			</div>
+			<p></p>
+
+			<div class="row" style="width: 60%; margin-left: 25%">
+
+				<div class="col-md-8 order-md-1">
+					<div class="col-md-8 order-md-1 errors" th:if="${errorMsg}">
+						<a th:text="${errorMsg}"></a>
+					</div>
+					<p></p>
+					<div class="mb-3">
+						<label for="userName">用户名</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="userName"
+								th:field="*{userName}" placeholder="用户名" required>
+							<div class="invalid-feedback" style="width: 100%;">用户名是必须的.</div>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="email">邮 箱 <span class="text-muted">(可选的)</span></label>
+						<input type="email" class="form-control" id="email"
+							th:field="*{email}" placeholder="you@example.com">
+						<div class="invalid-feedback">邮箱无效.</div>
+					</div>
+					<div class="mb-3">
+						<label for="password">密 码</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="password"
+								th:field="*{password}" placeholder="密码" required>
+							<div class="invalid-feedback" style="width: 100%;">密码是必须的.</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label for="confirmPassword">确认密码</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="confirmPassword"
+								th:field="*{confirmPassword}" placeholder="确认密码" required>
+							<div class="invalid-feedback" style="width: 100%;">确认密码是必须的.</div>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="address">地址</label> <input type="text"
+							class="form-control" id="address" placeholder="地址"
+							th:field="*{address}">
+					</div>
+				</div>
+			</div>
+			<div style="float: center; width: 50%; margin-left: 25%;">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+			</div>
+			<hr>
+			<p class="mt-5 mb-3 text-muted text-center">&copy; 2018-2019</p>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+    <nav class="navbar navbar-expand-md nav-background fixed-top">
+      <a class="navbar-brand whiteColor" href="#">航班查询系统</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link whiteColor" href="/">首页 <span class="sr-only">(current)</span></a>
+          </li>
+
+ 		 <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle whiteColor" href="https://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">基础信息</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="airlineSource">航班来源</a>
+              <a class="dropdown-item" href="template">导出模板</a>
+              <a class="dropdown-item" href="biz_rule">业务规则</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link whiteColor" href="import">航班查询</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link whiteColor" href="export">航班导出</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link whiteColor" href="statistics">航班统计</a>
+          </li>          
+        </ul>
+        <!-- 
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <p class="whiteColor" th:text="${session_user.userName}"></p>
+        </form>
+         -->
+      </div>
+    </nav>
+
+    

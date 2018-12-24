@@ -1,0 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "${APPLICATION_NAME}"
+data:
+  spring.profiles.active: "prod"
+  server.port: "8080"
+  spring.main.banner-mode: "off"
+  server.use-forward-headers: "true"
+  TILL_TEST: "123"
+  my.stage: "ttrain-dev-and-more"
+  my.jobs: "I am only a container"
+  my.secret: ${MY_SECRET}
+  spring.datasource.username: "darren"
+  spring.datasource.url: "jdbc:postgresql://ttrain-db.tsc.sh:5432/ttrain_darren?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory"
+  fm.event.endpoint: "https://fm-api.tsc.sh/event/"
+
+

@@ -1,0 +1,121 @@
+body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+
+.app-header {
+	position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3.5rem;
+    background-color: #346cb0;
+    color: #fff;
+    -webkit-box-shadow: 0 0 0 1px rgba(61,70,79,.05), 0 1px 3px 0 rgba(61,70,79,.15);
+    box-shadow: 0 0 0 1px rgba(61,70,79,.05), 0 1px 3px 0 rgba(61,70,79,.15);
+    z-index: 1030;
+}
+
+.nav-background{
+	background-color: #346cb0!important;
+	color: #fff;
+}
+.whiteColor{
+	color: #fff!important;
+}
+
+.navbar-nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    flex-direction: row;
+}  
+
+.dropdown, .dropleft, .dropright, .dropup {
+    position: relative;
+}  
+.navbar-toggler:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+mr-auto, .mx-auto {
+    margin-right: auto!important;
+}
+
+.navbar-expand-md .navbar-nav .nav-link {
+    padding-right: .5rem;
+    padding-left: .5rem;
+}    
+
+navbar-expand-md .navbar-nav .dropdown-menu {
+    position: absolute;
+}
+.dropdown-menu.show {
+    display: block;
+}
+
+
+.page-lst a{
+	margin-left:20px;
+}
+
+.errors{
+	color:red!important;
+}
+.success{
+	color:green!important;
+}
+
+.dataTable {
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width:860px!important;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.dataTable td, .dataTable th {
+    text-align: center;
+    padding: 8px;
+}
+
+.dataTable td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 1rem;
+}
+
+.dataTable thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.dataTable thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.dataTable tr:nth-child(even) {
+    background: #F8F8F8;
+}

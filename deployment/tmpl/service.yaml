@@ -1,0 +1,45 @@
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: ${APPLICATION_NAME}_mapping
+      prefix: /darren-api/
+      service: ${APPLICATION_NAME}:80
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: ${APPLICATION_NAME}_health_mapping
+      prefix: /${APPLICATION_PREFIX}/ok
+      rewrite: /health
+      service: ${APPLICATION_NAME}:80
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: ${APPLICATION_NAME}_tree_mapping
+      prefix: /darren-api/tre
+      rewrite: /findTrees
+      service: ${APPLICATION_NAME}:80
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name: ${APPLICATION_NAME}_car_mapping
+      prefix: /${APPLICATION_PREFIX}/fav
+      rewrite: /car
+      service: ${APPLICATION_NAME}:80
+  name: ${APPLICATION_NAME}
+  labels:
+    app: ${APPLICATION_NAME}
+
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: $APPLICATION_NAME
+
